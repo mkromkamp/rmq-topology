@@ -1,0 +1,404 @@
+{
+    "rabbit_version": "3.6.5",
+    "users": [
+        {
+            "name": "guest",
+            "password_hash": "3vj4mz5goHle6ZCZgJ727KcL5xQ=",
+            "hashing_algorithm": "rabbit_password_hashing_md5",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "guest",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [
+        {
+            "vhost": "/",
+            "name": "CijfersNotificatiesAzureQueuePolicy",
+            "pattern": "CijfersNotificatiesAzureQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "dead-letter-routing-key": "CijfersNotificatiesAzureQueue.Dead",
+                "ha-mode": "exactly",
+                "dead-letter-exchange": "NotificatiesExchange",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "CijfersDeadQueuePolicy",
+            "pattern": "CijfersDeadQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "ha-mode": "exactly",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "NotificatiesDeadQueuePolicy",
+            "pattern": "NotificatiesDeadQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "ha-mode": "exactly",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "FooQueuePolicy",
+            "pattern": "FooQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "ha-mode": "exactly",
+                "ha-sync-mode": "manual",
+                "dead-letter-exchange": "FooExchange",
+                "dead-letter-routing-key": "Foo.Dead"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "FilesDeadQueuePolicy",
+            "pattern": "FilesDeadQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "ha-mode": "exactly",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "CijfersMailQueuePolicy",
+            "pattern": "CijfersMailQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "dead-letter-routing-key": "CijfersMailQueue.Dead",
+                "ha-mode": "exactly",
+                "dead-letter-exchange": "CijfersExchange",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "NotificatiesAzureRegistratiesQueuePolicy",
+            "pattern": "NotificatiesAzureRegistratiesQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "dead-letter-routing-key": "NotificatiesAzureRegistratiesQueue.Dead",
+                "ha-mode": "exactly",
+                "dead-letter-exchange": "NotificatiesExchange",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "CijfersMailDelayedQueuePolicy",
+            "pattern": "CijfersMailDelayedQueue",
+            "apply-to": "all",
+            "definition": {
+                "message-ttl": 30000,
+                "ha-params": 2,
+                "ha-mode": "exactly",
+                "ha-sync-mode": "manual",
+                "dead-letter-exchange": "CijfersMailDelayedExchange"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "FilesImageConvertQueuePolicy",
+            "pattern": "FilesImageConvertQueue",
+            "apply-to": "all",
+            "definition": {
+                "ha-params": 2,
+                "dead-letter-routing-key": "FilesImageConvertQueue.Dead",
+                "ha-mode": "exactly",
+                "dead-letter-exchange": "FilesExchange",
+                "ha-sync-mode": "manual"
+            },
+            "priority": 0
+        }
+    ],
+    "queues": [
+        {
+            "name": "CijfersNotificatiesAzureQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "NotificatiesAzureRegistratiesQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "FooExchange.Dead",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "NotificatiesDeadQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "CijfersDeadQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "FilesImageConvertQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "MessageTestQueue.Timo",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "CijfersMailDelayedQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "FilesDeadQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "test",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "FooQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "CijfersMailQueue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "FilesExchange",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "CijfersExchange",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "CijfersMailDelayedExchange",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "NotificatiesExchange",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "test",
+            "vhost": "/",
+            "type": "fanout",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "FooExchange",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "CijfersExchange",
+            "vhost": "/",
+            "destination": "CijfersDeadQueue",
+            "destination_type": "queue",
+            "routing_key": "*.Dead",
+            "arguments": {}
+        },
+        {
+            "source": "CijfersExchange",
+            "vhost": "/",
+            "destination": "NotificatiesExchange",
+            "destination_type": "exchange",
+            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "arguments": {}
+        },
+        {
+            "source": "CijfersExchange",
+            "vhost": "/",
+            "destination": "CijfersMailDelayedQueue",
+            "destination_type": "queue",
+            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "arguments": {}
+        },
+        {
+            "source": "CijfersExchange",
+            "vhost": "/",
+            "destination": "MessageTestQueue.Timo",
+            "destination_type": "queue",
+            "routing_key": "Cijfers.Cijfer.Ingevoerd.Test.Timo",
+            "arguments": {}
+        },
+        {
+            "source": "CijfersMailDelayedExchange",
+            "vhost": "/",
+            "destination": "CijfersMailQueue",
+            "destination_type": "queue",
+            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "arguments": {}
+        },
+        {
+            "source": "FilesExchange",
+            "vhost": "/",
+            "destination": "FilesDeadQueue",
+            "destination_type": "queue",
+            "routing_key": "*.Dead",
+            "arguments": {}
+        },
+        {
+            "source": "FilesExchange",
+            "vhost": "/",
+            "destination": "FilesImageConvertQueue",
+            "destination_type": "queue",
+            "routing_key": "Files.Image.Convert",
+            "arguments": {}
+        },
+        {
+            "source": "FooExchange",
+            "vhost": "/",
+            "destination": "FooExchange.Dead",
+            "destination_type": "queue",
+            "routing_key": "*.Dead",
+            "arguments": {}
+        },
+        {
+            "source": "FooExchange",
+            "vhost": "/",
+            "destination": "FooQueue",
+            "destination_type": "queue",
+            "routing_key": "Foo",
+            "arguments": {}
+        },
+        {
+            "source": "NotificatiesExchange",
+            "vhost": "/",
+            "destination": "NotificatiesDeadQueue",
+            "destination_type": "queue",
+            "routing_key": "*.Dead",
+            "arguments": {}
+        },
+        {
+            "source": "NotificatiesExchange",
+            "vhost": "/",
+            "destination": "CijfersNotificatiesAzureQueue",
+            "destination_type": "queue",
+            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "arguments": {}
+        },
+        {
+            "source": "NotificatiesExchange",
+            "vhost": "/",
+            "destination": "NotificatiesAzureRegistratiesQueue",
+            "destination_type": "queue",
+            "routing_key": "Notificaties.AzureRegistraties.Deleted",
+            "arguments": {}
+        },
+        {
+            "source": "NotificatiesExchange",
+            "vhost": "/",
+            "destination": "NotificatiesAzureRegistratiesQueue",
+            "destination_type": "queue",
+            "routing_key": "Notificaties.AzureRegistraties.Updated",
+            "arguments": {}
+        },
+        {
+            "source": "test",
+            "vhost": "/",
+            "destination": "test",
+            "destination_type": "queue",
+            "routing_key": "",
+            "arguments": {}
+        }
+    ]
+}
