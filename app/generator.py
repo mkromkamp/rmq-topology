@@ -27,10 +27,10 @@ def gen():
     graph = pgv.AGraph(directed=True, strict=False)
 
     for exchange in broker.exchanges():
-        graph.add_node(exchange.name)
+        graph.add_node(exchange.name, shape="square")
 
     for queue in broker.queues():
-        graph.add_node(queue.name)
+        graph.add_node(queue.name, shape="rectangle")
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key)
