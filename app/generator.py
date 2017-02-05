@@ -49,7 +49,7 @@ def gen():
     graph.add_subgraph(queues, 'cluster_queues', label='queues')
 
     # graph.layout(prog='dot')
-    # graph.write(args.outfile)
-    graph.draw(args.outfile.name, prog='dot')
+    graph.write(args.outfile)
+    # graph.draw(args.outfile.name, prog='dot')
 
 gen()

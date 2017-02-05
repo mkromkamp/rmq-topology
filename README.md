@@ -11,5 +11,5 @@ Generate RabbitMQ topology from a broker definition file.
 ## Usage
 
 ``` python
-python ./app/generator.py -i <broker_file> -o <output_file>
+python ./app/generator.py -i <broker_file> -o <output_dot_file>
 ```
