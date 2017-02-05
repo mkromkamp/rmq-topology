@@ -24,7 +24,8 @@ def gen():
     broker = Broker(json.loads(args.infile.read()))
 
     # Create graph
-    graph = pgv.AGraph(directed=True, strict=False, clusterrank='local', ranksep='1.5 equally') # , rankdir='lr'
+    graph = pgv.AGraph(directed=True, strict=False, rankdir='TB',
+                       ratio='auto', nodesep='0.8 equally', ranksep='2.5 equally')
     exchanges = [exchange.name for exchange in broker.exchanges()]
     queues = [queue.name for queue in broker.queues()]
 
@@ -35,12 +36,13 @@ def gen():
         graph.add_node(queue, shape='rectangle')
 
     for binding in broker.bindings():
-        graph.add_edge(binding.source, binding.destination, label=binding.routing_key)
+        graph.add_edge(binding.source, binding.destination, label=binding.routing_key,
+                       group=binding.source)
 
     for policy in broker.policies():
         if policy.pattern is not None and policy.definition.dead_letter_exchange is not None:
             graph.add_edge(policy.pattern, policy.definition.dead_letter_exchange,
-                           label=policy.definition.dead_letter_routing_key)
+                           label=policy.definition.dead_letter_routing_key, group=policy.pattern)
 
     # Sub graphs
     graph.add_subgraph(exchanges, 'cluster_exchanges', label='exchanges')
