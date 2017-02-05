@@ -1,0 +1,127 @@
+digraph {
+	graph [bb="0,0,1795,534.5",
+		clusterrank=local,
+		outputMode=edgesfirst,
+		rankdir=lr,
+		ranksep="1.5 equally"
+	];
+	node [label="\N"];
+	subgraph cluster_queues {
+		graph [bb="448,56.5,1787,154.5",
+			label=queues,
+			lheight=0.21,
+			lp="1117.5,143",
+			lwidth=0.53
+		];
+		CijfersNotificatiesAzureQueue		 [height=0.5,
+			pos="778,82.5",
+			shape=rectangle,
+			width=2.5694];
+		NotificatiesAzureRegistratiesQueue		 [height=0.5,
+			pos="562,82.5",
+			shape=rectangle,
+			width=2.9444];
+		NotificatiesDeadQueue		 [height=0.5,
+			pos="960,82.5",
+			shape=rectangle,
+			width=1.9861];
+		CijfersDeadQueue		 [height=0.5,
+			pos="1720,82.5",
+			shape=rectangle,
+			width=1.625];
+		FilesImageConvertQueue		 [height=0.5,
+			pos="1128,82.5",
+			shape=rectangle,
+			width=2.1667];
+		CijfersMailDelayedQueue		 [height=0.5,
+			pos="1430,82.5",
+			shape=rectangle,
+			width=2.2222];
+		FilesDeadQueue		 [height=0.5,
+			pos="1278,82.5",
+			shape=rectangle,
+			width=1.4861];
+		CijfersMailQueue		 [height=0.5,
+			pos="1586,82.5",
+			shape=rectangle,
+			width=1.5972];
+	}
+	subgraph cluster_exchanges {
+		graph [bb="8,8,440,526.5",
+			label=exchanges,
+			lheight=0.21,
+			lp="224,515",
+			lwidth=0.79
+		];
+		FilesExchange		 [height=1.3333,
+			pos="64,383.5",
+			shape=square,
+			width=1.3333];
+		CijfersExchange		 [height=1.4861,
+			pos="379,383.5",
+			shape=square,
+			width=1.4861];
+		NotificatiesExchange		 [height=1.8472,
+			pos="144,82.5",
+			shape=square,
+			width=1.8472];
+		CijfersExchange -> NotificatiesExchange		 [label="Cijfers.Cijfer.Ingevoerd",
+			lp="125.5,233",
+			pos="e,77.352,146.11 351.37,329.77 342.09,316.47 330.58,303.44 317,294.5 219.5,230.34 133.56,331.12 60,240.5 38.988,214.61 50.59,182.67 \
+71.056,154.37"];
+		CijfersMailDelayedExchange		 [height=2.4722,
+			pos="219,383.5",
+			shape=square,
+			width=2.4722];
+	}
+	CijfersNotificatiesAzureQueue -> NotificatiesExchange	 [label="CijfersNotificatiesAzureQueue.Dead",
+		lp="567,233",
+		pos="e,210.72,119.4 769.61,100.72 754.33,131.39 718.77,192.32 667.5,216.5 586.7,254.6 554.11,233.98 466.5,216.5 378.09,198.86 283.59,\
+156.51 219.89,124.1"];
+	NotificatiesAzureRegistratiesQueue -> NotificatiesExchange	 [label="NotificatiesAzureRegistratiesQueue.Dead",
+		lp="333.25,93",
+		pos="e,210.7,82.5 455.61,82.5 382.42,82.5 286.9,82.5 221.01,82.5"];
+	FilesImageConvertQueue -> FilesExchange	 [label="FilesImageConvertQueue.Dead",
+		lp="952,233",
+		pos="e,84.02,335.14 1110.4,100.71 1093.6,116.48 1066.7,139.58 1040,154.5 939.59,210.52 908.47,216.6 796,240.5 648.81,271.77 250.23,217.4 \
+121,294.5 108.17,302.15 97.711,313.94 89.418,326.43"];
+	CijfersMailDelayedQueue -> CijfersMailDelayedExchange	 [label=None,
+		lp="1209,233",
+		pos="e,308.23,298.12 1411,100.71 1393.4,116.05 1366.1,138.49 1340,154.5 1301,178.39 1197.3,229.28 1153,240.5 975.39,285.42 504.11,223.98 \
+317.69,294.33"];
+	CijfersMailQueue -> CijfersExchange	 [label="CijfersMailQueue.Dead",
+		lp="1609.5,233",
+		pos="e,432.84,383.17 1585.7,100.73 1584,133.66 1575.3,205.38 1532,240.5 1363,377.46 660.12,384.43 443.11,383.23"];
+	FilesExchange -> FilesImageConvertQueue	 [label="Files.Image.Convert",
+		lp="270,233",
+		pos="e,1112.8,100.7 90.098,335.46 98.956,321.51 109.54,306.71 121,294.5 125.4,289.81 207.98,227.78 214,225.5 558.58,94.999 698.14,291.96 \
+1040,154.5 1065.4,144.28 1089.3,124.08 1105.7,107.84"];
+	FilesExchange -> FilesDeadQueue	 [label="*.Dead",
+		lp="1113,233",
+		pos="e,1265.8,100.69 83.645,335.42 92.647,319.71 104.96,303.84 121,294.5 298.17,191.34 843.87,293.2 1042,240.5 1125,218.43 1146.8,206.68 \
+1215,154.5 1232,141.52 1247.9,123.49 1259.5,108.85"];
+	CijfersExchange -> CijfersDeadQueue	 [label="*.Dead",
+		lp="1710,233",
+		pos="e,1721.2,100.64 432.67,380.19 665.8,369.68 1583.1,323.3 1679,240.5 1716.4,208.22 1721.8,146.5 1721.5,110.81"];
+	CijfersExchange -> CijfersMailDelayedQueue	 [label="Cijfers.Cijfer.Ingevoerd",
+		lp="1462.5,233",
+		pos="e,1430.5,100.58 432.77,382.32 619.97,380.58 1239.6,365.35 1384,240.5 1421.7,207.92 1429.3,146.31 1430.4,110.72"];
+	NotificatiesExchange -> CijfersNotificatiesAzureQueue	 [label="Cijfers.Cijfer.Ingevoerd",
+		lp="396,233",
+		pos="e,757.28,100.5 210.83,146.18 244.06,173.48 286.48,202.32 330.5,216.5 479.42,264.45 536.11,222.51 677,154.5 703.3,141.8 730.08,122.35 \
+749.45,106.87"];
+	NotificatiesExchange -> NotificatiesAzureRegistratiesQueue	 [label="Notificaties.AzureRegistraties.Deleted",
+		lp="333.25,72",
+		pos="e,455.79,66.04 210.94,66.871 216.77,65.913 222.6,65.097 228.25,64.5 274.66,59.598 391.7,61.133 438.25,64.5 440.67,64.675 443.12,\
+64.869 445.58,65.081"];
+	NotificatiesExchange -> NotificatiesAzureRegistratiesQueue	 [label="Notificaties.AzureRegistraties.Updated",
+		lp="333.25,93",
+		pos="e,455.61,82.5 210.7,82.5 273.78,82.5 369.82,82.5 445.54,82.5"];
+	NotificatiesExchange -> NotificatiesDeadQueue	 [label="*.Dead",
+		lp="772,233",
+		pos="e,945.3,100.82 210.96,118.59 329.88,177.81 584.92,282.74 792,216.5 853.91,196.7 909.37,141.78 938.48,108.72"];
+	CijfersMailDelayedExchange -> CijfersMailQueue	 [label="Cijfers.Cijfer.Ingevoerd",
+		lp="1314.5,233",
+		pos="e,1574.2,100.74 308.22,298.1 310.78,296.81 313.38,295.6 316,294.5 502.95,215.9 1035.1,305.99 1227,240.5 1238.2,236.68 1238.2,230.41 \
+1249,225.5 1361.9,174.03 1412.3,217.84 1519,154.5 1538.4,142.97 1555.8,124.19 1568,108.84"];
+}
