@@ -24,25 +24,30 @@ def gen():
     broker = Broker(json.loads(args.infile.read()))
 
     # Create graph
-    graph = pgv.AGraph(directed=True, strict=False)
+    graph = pgv.AGraph(directed=True, strict=False, clusterrank='local', ranksep='1.5 equally') # , rankdir='lr'
+    exchanges = [exchange.name for exchange in broker.exchanges()]
+    queues = [queue.name for queue in broker.queues()]
 
-    for exchange in broker.exchanges():
-        graph.add_node(exchange.name, shape="square")
+    for exchange in exchanges:
+        graph.add_node(exchange, shape='square')
 
-    for queue in broker.queues():
-        graph.add_node(queue.name, shape="rectangle")
+    for queue in queues:
+        graph.add_node(queue, shape='rectangle')
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key)
-        # print('{} --- {} --- {}'.format(binding.source, binding.routing_key, binding.destination))
 
     for policy in broker.policies():
         if policy.pattern is not None and policy.definition.dead_letter_exchange is not None:
             graph.add_edge(policy.pattern, policy.definition.dead_letter_exchange,
                            label=policy.definition.dead_letter_routing_key)
 
-    # graph.layout(prog='circo')
+    # Sub graphs
+    graph.add_subgraph(exchanges, 'cluster_exchanges', label='exchanges')
+    graph.add_subgraph(queues, 'cluster_queues', label='queues')
+
+    # graph.layout(prog='dot')
     # graph.write(args.outfile)
-    graph.draw(args.outfile.name, prog='circo')
+    graph.draw(args.outfile.name, prog='dot')
 
 gen()
