@@ -64,20 +64,6 @@
         },
         {
             "vhost": "/",
-            "name": "FooQueuePolicy",
-            "pattern": "FooQueue",
-            "apply-to": "all",
-            "definition": {
-                "ha-params": 2,
-                "ha-mode": "exactly",
-                "ha-sync-mode": "manual",
-                "dead-letter-exchange": "FooExchange",
-                "dead-letter-routing-key": "Foo.Dead"
-            },
-            "priority": 0
-        },
-        {
-            "vhost": "/",
             "name": "FilesDeadQueuePolicy",
             "pattern": "FilesDeadQueue",
             "apply-to": "all",
@@ -161,13 +147,6 @@
             "arguments": {}
         },
         {
-            "name": "FooExchange.Dead",
-            "vhost": "/",
-            "durable": true,
-            "auto_delete": false,
-            "arguments": {}
-        },
-        {
             "name": "NotificatiesDeadQueue",
             "vhost": "/",
             "durable": true,
@@ -189,13 +168,6 @@
             "arguments": {}
         },
         {
-            "name": "MessageTestQueue.Timo",
-            "vhost": "/",
-            "durable": true,
-            "auto_delete": false,
-            "arguments": {}
-        },
-        {
             "name": "CijfersMailDelayedQueue",
             "vhost": "/",
             "durable": true,
@@ -204,20 +176,6 @@
         },
         {
             "name": "FilesDeadQueue",
-            "vhost": "/",
-            "durable": true,
-            "auto_delete": false,
-            "arguments": {}
-        },
-        {
-            "name": "test",
-            "vhost": "/",
-            "durable": true,
-            "auto_delete": false,
-            "arguments": {}
-        },
-        {
-            "name": "FooQueue",
             "vhost": "/",
             "durable": true,
             "auto_delete": false,
@@ -267,24 +225,6 @@
             "auto_delete": false,
             "internal": false,
             "arguments": {}
-        },
-        {
-            "name": "test",
-            "vhost": "/",
-            "type": "fanout",
-            "durable": true,
-            "auto_delete": false,
-            "internal": false,
-            "arguments": {}
-        },
-        {
-            "name": "FooExchange",
-            "vhost": "/",
-            "type": "topic",
-            "durable": true,
-            "auto_delete": false,
-            "internal": false,
-            "arguments": {}
         }
     ],
     "bindings": [
@@ -313,14 +253,6 @@
             "arguments": {}
         },
         {
-            "source": "CijfersExchange",
-            "vhost": "/",
-            "destination": "MessageTestQueue.Timo",
-            "destination_type": "queue",
-            "routing_key": "Cijfers.Cijfer.Ingevoerd.Test.Timo",
-            "arguments": {}
-        },
-        {
             "source": "CijfersMailDelayedExchange",
             "vhost": "/",
             "destination": "CijfersMailQueue",
@@ -342,22 +274,6 @@
             "destination": "FilesImageConvertQueue",
             "destination_type": "queue",
             "routing_key": "Files.Image.Convert",
-            "arguments": {}
-        },
-        {
-            "source": "FooExchange",
-            "vhost": "/",
-            "destination": "FooExchange.Dead",
-            "destination_type": "queue",
-            "routing_key": "*.Dead",
-            "arguments": {}
-        },
-        {
-            "source": "FooExchange",
-            "vhost": "/",
-            "destination": "FooQueue",
-            "destination_type": "queue",
-            "routing_key": "Foo",
             "arguments": {}
         },
         {
@@ -390,14 +306,6 @@
             "destination": "NotificatiesAzureRegistratiesQueue",
             "destination_type": "queue",
             "routing_key": "Notificaties.AzureRegistraties.Updated",
-            "arguments": {}
-        },
-        {
-            "source": "test",
-            "vhost": "/",
-            "destination": "test",
-            "destination_type": "queue",
-            "routing_key": "",
             "arguments": {}
         }
     ]
