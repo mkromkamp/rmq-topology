@@ -96,9 +96,9 @@ class BrokerPolicyDefinition:
     ''' Broker policy definition '''
     def __init__(self, policy_definition):
         self.message_ttl = policy_definition.get('message-ttl', None)
-        self.ha_params = policy_definition['ha-params']
-        self.ha_mode = policy_definition['ha-mode']
-        self.ha_sync_mode = policy_definition['ha-sync-mode']
+        self.ha_params = policy_definition.get('ha-params', None)
+        self.ha_mode = policy_definition.get('ha-mode', None)
+        self.ha_sync_mode = policy_definition.get('ha-sync-mode', None)
         self.dead_letter_routing_key = policy_definition.get('dead-letter-routing-key', None)
         self.dead_letter_exchange = policy_definition.get('dead-letter-exchange', None)
 
