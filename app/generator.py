@@ -47,6 +47,7 @@ def main():
     # graph.layout(prog='dot')
     # graph.write(args.outfile)
     graph.draw(args.outfile.name, prog='dot')
+    args.outfile.close()
 
 
 if __name__ == "__main__":
