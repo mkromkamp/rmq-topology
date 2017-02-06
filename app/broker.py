@@ -50,7 +50,7 @@ class BrokerExchange:
 
     def label(self):
         ''' Exchange label '''
-        template = '{} \n type: {}'
+        template = '<<b>{}</b> <br /> type: {}>'
         return template.format(self.name, self.type)
 
 
@@ -66,11 +66,11 @@ class BrokerQueue:
 
     def label(self):
         ''' Queue label '''
-        label = '{} \n'.format(self.name)
+        label = '<<b>{}</b> <br />'.format(self.name)
         for policy in self.policies:
             label = '\n'.join((label, policy.definition.label()))
 
-        return label
+        return '{}>'.format(label)
 
 
 class BrokerBinding:
@@ -107,6 +107,6 @@ class BrokerPolicyDefinition:
         label = ''
         for key, value in self.__dict__.items():
             if value:
-                label = '\n'.join((label, '{}: {}'.format(key, value)))
+                label = '<br />'.join((label, '{}: {}'.format(key, value)))
 
         return label
