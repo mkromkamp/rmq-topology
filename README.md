@@ -10,6 +10,12 @@ Generate RabbitMQ topology from a broker definition file.
 
 ## Usage
 
+Generate dot file:
 ``` python
 python ./app/generator.py -i <broker_file> -o <output_dot_file>
+```
+
+Generate png file:
+``` bash
+dot -Tpng -o ./sample/graph.png ./sample/out.dot
 ```
