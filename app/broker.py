@@ -41,6 +41,11 @@ class BrokerExchange:
         self.internal = exchange_definition['internal']
         self.arguments = exchange_definition['arguments']
 
+    def label(self):
+        ''' Exchange label '''
+        template = '{} \n type: {}'
+        return template.format(self.name, self.type)
+
 
 class BrokerQueue:
     ''' Broker queue '''
@@ -50,6 +55,11 @@ class BrokerQueue:
         self.durable = queue_definition['durable']
         self.auto_delete = queue_definition['auto_delete']
         self.argurments = queue_definition['arguments']
+
+    def label(self):
+        ''' Queue label '''
+        template = '{}'
+        return template.format(self.name)
 
 
 class BrokerBinding:
