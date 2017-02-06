@@ -74,6 +74,7 @@ class BrokerPolicy:
 class BrokerPolicyDefinition:
     ''' Broker policy definition '''
     def __init__(self, policy_definition):
+        self.message_ttl = policy_definition.get('message-ttl', None)
         self.ha_params = policy_definition['ha-params']
         self.ha_mode = policy_definition['ha-mode']
         self.ha_sync_mode = policy_definition['ha-sync-mode']
