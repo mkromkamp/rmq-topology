@@ -50,8 +50,12 @@ class BrokerExchange:
 
     def label(self):
         ''' Exchange label '''
-        template = '<<b>{}</b> <br /> type: {}>'
-        return template.format(self.name, self.type)
+        label = '<<b>{}</b> <br />'.format(self.name)
+        for key, value in self.__dict__.items():
+            if value and key != 'name':
+                label = '<br />'.join((label, '{}: {}'.format(key, value)))
+
+        return '{}>'.format(label)
 
 
 class BrokerQueue:
