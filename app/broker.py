@@ -1,4 +1,5 @@
 
+
 class Broker:
     ''' RabbitMQ broker definition '''
     def __init__(self, broker_definition):
@@ -10,10 +11,9 @@ class Broker:
                 for exchange
                 in self.definition['exchanges']]
 
-
     def queues(self):
         ''' Queues '''
-        return [BrokerQueue(queue)
+        return [BrokerQueue(queue, self.queue_policies(queue['name']))
                 for queue
                 in self.definition['queues']]
 
@@ -56,21 +56,21 @@ class BrokerExchange:
 
 class BrokerQueue:
     ''' Broker queue '''
-    def __init__(self, queue_definition):
+    def __init__(self, queue_definition, policies):
         self.name = queue_definition['name']
         self.vhost = queue_definition['vhost']
         self.durable = queue_definition['durable']
         self.auto_delete = queue_definition['auto_delete']
         self.argurments = queue_definition['arguments']
+        self.policies = policies
 
-    def label(self, policies):
+    def label(self):
         ''' Queue label '''
-        if policies and policies[0].definition.message_ttl is not None:
-            template = '{} \n message_ttl: {}'
-            return template.format(self.name, policies[0].definition.message_ttl)
-        else:
-            template = '{}'
-            return template.format(self.name)
+        label = '{} \n'.format(self.name)
+        for policy in self.policies:
+            label = '\n'.join((label, policy.definition.label()))
+
+        return label
 
 
 class BrokerBinding:
@@ -101,3 +101,12 @@ class BrokerPolicyDefinition:
         self.ha_sync_mode = policy_definition['ha-sync-mode']
         self.dead_letter_routing_key = policy_definition.get('dead-letter-routing-key', None)
         self.dead_letter_exchange = policy_definition.get('dead-letter-exchange', None)
+
+    def label(self):
+        ''' Policy defintion label '''
+        label = ''
+        for key, value in self.__dict__.items():
+            if value:
+                label = '\n'.join((label, '{}: {}'.format(key, value)))
+
+        return label

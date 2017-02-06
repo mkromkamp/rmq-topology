@@ -32,7 +32,7 @@ def main():
                        shape='rectangle', fillcolor='#3333CC')
 
     for queue in broker.queues():
-        graph.add_node(queue.name, label=queue.label(broker.queue_policies(queue.name)),
+        graph.add_node(queue.name, label=queue.label(),
                        style='filled', shape='rectangle', fillcolor='#FF0000')
 
     for binding in broker.bindings():
