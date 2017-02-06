@@ -87,6 +87,7 @@ class BrokerBinding:
         self.routing_key = binding_definition['routing_key']
         self.arguments = binding_definition['arguments']
 
+
 class BrokerPolicy:
     ''' Broker policy '''
     def __init__(self, policy_definition):
@@ -95,6 +96,7 @@ class BrokerPolicy:
         self.apply_to = policy_definition['apply-to']
         self.priority = policy_definition['priority']
         self.definition = BrokerPolicyDefinition(policy_definition['definition'])
+
 
 class BrokerPolicyDefinition:
     ''' Broker policy definition '''
