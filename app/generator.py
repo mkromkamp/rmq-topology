@@ -44,9 +44,9 @@ def main():
             graph.add_edge(policy.pattern, policy.definition.dead_letter_exchange,
                            label=policy.definition.dead_letter_routing_key, group=policy.pattern)
 
-    # graph.layout(prog='dot')
-    # graph.write(args.outfile)
-    graph.draw(args.outfile.name, prog='dot')
+    graph.layout(prog='dot')
+    graph.write(args.outfile)
+    # graph.draw(args.outfile.name, prog='dot')
     args.outfile.close()
 
 
