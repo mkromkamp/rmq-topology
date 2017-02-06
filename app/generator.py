@@ -18,7 +18,7 @@ def parse_args():
 
     return parser.parse_args()
 
-def gen():
+def main():
     ''' Generator '''
     args = parse_args()
     broker = Broker(json.loads(args.infile.read()))
@@ -47,4 +47,6 @@ def gen():
     # graph.write(args.outfile)
     graph.draw(args.outfile.name, prog='dot')
 
-gen()
+
+if __name__ == "__main__":
+    main()
