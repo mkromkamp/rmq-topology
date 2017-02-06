@@ -43,10 +43,6 @@ def gen():
             graph.add_edge(policy.pattern, policy.definition.dead_letter_exchange,
                            label=policy.definition.dead_letter_routing_key, group=policy.pattern)
 
-    # Sub graphs, disabled because can't get a nice layout with subgraphs.
-    # graph.add_subgraph(exchanges, 'cluster_exchanges', label='exchanges')
-    # graph.add_subgraph(queues, 'cluster_queues', label='queues')
-
     # graph.layout(prog='dot')
     # graph.write(args.outfile)
     graph.draw(args.outfile.name, prog='dot')
