@@ -26,22 +26,22 @@
     "policies": [
         {
             "vhost": "/",
-            "name": "CijfersNotificatiesAzureQueuePolicy",
-            "pattern": "CijfersNotificatiesAzureQueue",
+            "name": "SomeNotificationQueuePolicy",
+            "pattern": "SomeNotificationQueue",
             "apply-to": "all",
             "definition": {
                 "ha-params": 2,
-                "dead-letter-routing-key": "CijfersNotificatiesAzureQueue.Dead",
+                "dead-letter-routing-key": "SomeNotificationQueue.Dead",
                 "ha-mode": "exactly",
-                "dead-letter-exchange": "NotificatiesExchange",
+                "dead-letter-exchange": "NotificationsExchange",
                 "ha-sync-mode": "manual"
             },
             "priority": 0
         },
         {
             "vhost": "/",
-            "name": "CijfersDeadQueuePolicy",
-            "pattern": "CijfersDeadQueue",
+            "name": "MailDeadQueuePolicy",
+            "pattern": "MailDeadQueue",
             "apply-to": "all",
             "definition": {
                 "ha-params": 2,
@@ -76,43 +76,29 @@
         },
         {
             "vhost": "/",
-            "name": "CijfersMailQueuePolicy",
-            "pattern": "CijfersMailQueue",
+            "name": "MailQueuePolicy",
+            "pattern": "MailQueue",
             "apply-to": "all",
             "definition": {
                 "ha-params": 2,
-                "dead-letter-routing-key": "CijfersMailQueue.Dead",
+                "dead-letter-routing-key": "MailQueue.Dead",
                 "ha-mode": "exactly",
-                "dead-letter-exchange": "CijfersExchange",
+                "dead-letter-exchange": "MailsExchange",
                 "ha-sync-mode": "manual"
             },
             "priority": 0
         },
         {
             "vhost": "/",
-            "name": "NotificatiesAzureRegistratiesQueuePolicy",
-            "pattern": "NotificatiesAzureRegistratiesQueue",
-            "apply-to": "all",
-            "definition": {
-                "ha-params": 2,
-                "dead-letter-routing-key": "NotificatiesAzureRegistratiesQueue.Dead",
-                "ha-mode": "exactly",
-                "dead-letter-exchange": "NotificatiesExchange",
-                "ha-sync-mode": "manual"
-            },
-            "priority": 0
-        },
-        {
-            "vhost": "/",
-            "name": "CijfersMailDelayedQueuePolicy",
-            "pattern": "CijfersMailDelayedQueue",
+            "name": "MailDelayedQueuePolicy",
+            "pattern": "MailDelayedQueue",
             "apply-to": "all",
             "definition": {
                 "message-ttl": 30000,
                 "ha-params": 2,
                 "ha-mode": "exactly",
                 "ha-sync-mode": "manual",
-                "dead-letter-exchange": "CijfersMailDelayedExchange"
+                "dead-letter-exchange": "MailDelayedExchange"
             },
             "priority": 0
         },
@@ -133,14 +119,7 @@
     ],
     "queues": [
         {
-            "name": "CijfersNotificatiesAzureQueue",
-            "vhost": "/",
-            "durable": true,
-            "auto_delete": false,
-            "arguments": {}
-        },
-        {
-            "name": "NotificatiesAzureRegistratiesQueue",
+            "name": "SomeNotificationQueue",
             "vhost": "/",
             "durable": true,
             "auto_delete": false,
@@ -154,7 +133,7 @@
             "arguments": {}
         },
         {
-            "name": "CijfersDeadQueue",
+            "name": "MailDeadQueue",
             "vhost": "/",
             "durable": true,
             "auto_delete": false,
@@ -168,7 +147,7 @@
             "arguments": {}
         },
         {
-            "name": "CijfersMailDelayedQueue",
+            "name": "MailDelayedQueue",
             "vhost": "/",
             "durable": true,
             "auto_delete": false,
@@ -182,7 +161,7 @@
             "arguments": {}
         },
         {
-            "name": "CijfersMailQueue",
+            "name": "MailQueue",
             "vhost": "/",
             "durable": true,
             "auto_delete": false,
@@ -200,7 +179,7 @@
             "arguments": {}
         },
         {
-            "name": "CijfersExchange",
+            "name": "MailsExchange",
             "vhost": "/",
             "type": "topic",
             "durable": true,
@@ -209,7 +188,7 @@
             "arguments": {}
         },
         {
-            "name": "CijfersMailDelayedExchange",
+            "name": "MailDelayedExchange",
             "vhost": "/",
             "type": "topic",
             "durable": true,
@@ -218,7 +197,7 @@
             "arguments": {}
         },
         {
-            "name": "NotificatiesExchange",
+            "name": "NotificationsExchange",
             "vhost": "/",
             "type": "topic",
             "durable": true,
@@ -229,35 +208,35 @@
     ],
     "bindings": [
         {
-            "source": "CijfersExchange",
+            "source": "MailsExchange",
             "vhost": "/",
-            "destination": "CijfersDeadQueue",
+            "destination": "MailDeadQueue",
             "destination_type": "queue",
             "routing_key": "*.Dead",
             "arguments": {}
         },
         {
-            "source": "CijfersExchange",
+            "source": "MailsExchange",
             "vhost": "/",
-            "destination": "NotificatiesExchange",
+            "destination": "NotificationsExchange",
             "destination_type": "exchange",
-            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "routing_key": "Some.Entity.Created",
             "arguments": {}
         },
         {
-            "source": "CijfersExchange",
+            "source": "MailsExchange",
             "vhost": "/",
-            "destination": "CijfersMailDelayedQueue",
+            "destination": "MailDelayedQueue",
             "destination_type": "queue",
-            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "routing_key": "Some.Entity.Created",
             "arguments": {}
         },
         {
-            "source": "CijfersMailDelayedExchange",
+            "source": "MailDelayedExchange",
             "vhost": "/",
-            "destination": "CijfersMailQueue",
+            "destination": "MailQueue",
             "destination_type": "queue",
-            "routing_key": "Cijfers.Cijfer.Ingevoerd",
+            "routing_key": "Some.Entity.Created",
             "arguments": {}
         },
         {
@@ -273,11 +252,11 @@
             "vhost": "/",
             "destination": "FilesImageConvertQueue",
             "destination_type": "queue",
-            "routing_key": "Files.Image.Convert",
+            "routing_key": "Files.Image.Created",
             "arguments": {}
         },
         {
-            "source": "NotificatiesExchange",
+            "source": "NotificationsExchange",
             "vhost": "/",
             "destination": "NotificatiesDeadQueue",
             "destination_type": "queue",
@@ -285,27 +264,11 @@
             "arguments": {}
         },
         {
-            "source": "NotificatiesExchange",
+            "source": "NotificationsExchange",
             "vhost": "/",
-            "destination": "CijfersNotificatiesAzureQueue",
+            "destination": "SomeNotificationQueue",
             "destination_type": "queue",
-            "routing_key": "Cijfers.Cijfer.Ingevoerd",
-            "arguments": {}
-        },
-        {
-            "source": "NotificatiesExchange",
-            "vhost": "/",
-            "destination": "NotificatiesAzureRegistratiesQueue",
-            "destination_type": "queue",
-            "routing_key": "Notificaties.AzureRegistraties.Deleted",
-            "arguments": {}
-        },
-        {
-            "source": "NotificatiesExchange",
-            "vhost": "/",
-            "destination": "NotificatiesAzureRegistratiesQueue",
-            "destination_type": "queue",
-            "routing_key": "Notificaties.AzureRegistraties.Updated",
+            "routing_key": "Some.Entity.Created",
             "arguments": {}
         }
     ]
