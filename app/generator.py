@@ -25,15 +25,15 @@ def main():
     args.infile.close()
 
     # Create graph
-    graph = pgv.AGraph(directed=True, strict=False, rankdir='LR')
+    graph = pgv.AGraph(directed=True, strict=False, rankdir='LR', nodesep='0.8 equally')
     exchanges = [exchange.name for exchange in broker.exchanges()]
     queues = [queue.name for queue in broker.queues()]
 
     for exchange in exchanges:
-        graph.add_node(exchange, shape='square', color='#3333CC')
+        graph.add_node(exchange, style='filled', shape='square', fillcolor='#3333CC')
 
     for queue in queues:
-        graph.add_node(queue, shape='rectangle', color='#FF0000')
+        graph.add_node(queue, style='filled', shape='rectangle', fillcolor='#FF0000')
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key,
