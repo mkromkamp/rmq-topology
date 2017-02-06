@@ -29,7 +29,7 @@ def main():
 
     for exchange in broker.exchanges():
         graph.add_node(exchange.name, label=exchange.label(), style='filled',
-                       shape='rectangle', fillcolor='#3333CC')
+                       shape='rectangle', fillcolor='#3333CC', fontcolor='#ffffff')
 
     for queue in broker.queues():
         graph.add_node(queue.name, label=queue.label(),
