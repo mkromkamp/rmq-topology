@@ -22,6 +22,7 @@ def main():
     ''' Generator '''
     args = parse_args()
     broker = Broker(json.loads(args.infile.read()))
+    args.infile.close()
 
     # Create graph
     graph = pgv.AGraph(directed=True, strict=False, rankdir='LR')
