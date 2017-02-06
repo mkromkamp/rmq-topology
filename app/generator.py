@@ -26,14 +26,16 @@ def main():
 
     # Create graph
     graph = pgv.AGraph(directed=True, strict=False, rankdir='LR', nodesep='0.8 equally')
-    exchanges = [exchange.name for exchange in broker.exchanges()]
-    queues = [queue.name for queue in broker.queues()]
 
-    for exchange in exchanges:
-        graph.add_node(exchange, style='filled', shape='square', fillcolor='#3333CC')
+    for exchange in broker.exchanges():
+        label = '{} \n type: {}'.format(exchange.name, exchange.type)
+        graph.add_node(exchange.name, label=label, style='filled',
+                       shape='rectangle', fillcolor='#3333CC')
 
-    for queue in queues:
-        graph.add_node(queue, style='filled', shape='rectangle', fillcolor='#FF0000')
+    for queue in broker.queues():
+        label = '{}'.format(queue.name)
+        graph.add_node(queue.name, label=label, style='filled',
+                       shape='rectangle', fillcolor='#FF0000')
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key,
