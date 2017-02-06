@@ -1,45 +1,35 @@
 digraph  {
-	graph [nodesep="0.8 equally",
-		rankdir=TB,
-		ranksep="2.5 equally",
-		ratio=auto
-	];
-	subgraph cluster_queues {
-		graph [label=queues];
-		CijfersNotificatiesAzureQueue		 [shape=rectangle];
-		NotificatiesAzureRegistratiesQueue		 [shape=rectangle];
-		NotificatiesDeadQueue		 [shape=rectangle];
-		CijfersDeadQueue		 [shape=rectangle];
-		FilesImageConvertQueue		 [shape=rectangle];
-		CijfersMailDelayedQueue		 [shape=rectangle];
-		FilesDeadQueue		 [shape=rectangle];
-		CijfersMailQueue		 [shape=rectangle];
-	}
-	subgraph cluster_exchanges {
-		graph [label=exchanges];
-		FilesExchange		 [shape=square];
-		CijfersExchange		 [shape=square];
-		NotificatiesExchange		 [shape=square];
-		CijfersExchange -> NotificatiesExchange		 [group=CijfersExchange,
-			label="Cijfers.Cijfer.Ingevoerd"];
-		CijfersMailDelayedExchange		 [shape=square];
-	}
+	graph [rankdir=LR];
+	FilesExchange	 [shape=square];
+	FilesImageConvertQueue	 [shape=rectangle];
 	FilesExchange -> FilesImageConvertQueue	 [group=FilesExchange,
 		label="Files.Image.Convert"];
+	FilesDeadQueue	 [shape=rectangle];
 	FilesExchange -> FilesDeadQueue	 [group=FilesExchange,
 		label="*.Dead"];
+	CijfersExchange	 [shape=square];
+	NotificatiesExchange	 [shape=square];
+	CijfersExchange -> NotificatiesExchange	 [group=CijfersExchange,
+		label="Cijfers.Cijfer.Ingevoerd"];
+	CijfersDeadQueue	 [shape=rectangle];
 	CijfersExchange -> CijfersDeadQueue	 [group=CijfersExchange,
 		label="*.Dead"];
+	CijfersMailDelayedQueue	 [shape=rectangle];
 	CijfersExchange -> CijfersMailDelayedQueue	 [group=CijfersExchange,
 		label="Cijfers.Cijfer.Ingevoerd"];
+	CijfersMailDelayedExchange	 [shape=square];
+	CijfersMailQueue	 [shape=rectangle];
 	CijfersMailDelayedExchange -> CijfersMailQueue	 [group=CijfersMailDelayedExchange,
 		label="Cijfers.Cijfer.Ingevoerd"];
+	CijfersNotificatiesAzureQueue	 [shape=rectangle];
 	NotificatiesExchange -> CijfersNotificatiesAzureQueue	 [group=NotificatiesExchange,
 		label="Cijfers.Cijfer.Ingevoerd"];
+	NotificatiesAzureRegistratiesQueue	 [shape=rectangle];
 	NotificatiesExchange -> NotificatiesAzureRegistratiesQueue	 [group=NotificatiesExchange,
 		label="Notificaties.AzureRegistraties.Deleted"];
 	NotificatiesExchange -> NotificatiesAzureRegistratiesQueue	 [group=NotificatiesExchange,
 		label="Notificaties.AzureRegistraties.Updated"];
+	NotificatiesDeadQueue	 [shape=rectangle];
 	NotificatiesExchange -> NotificatiesDeadQueue	 [group=NotificatiesExchange,
 		label="*.Dead"];
 	CijfersNotificatiesAzureQueue -> NotificatiesExchange	 [group=CijfersNotificatiesAzureQueue,
