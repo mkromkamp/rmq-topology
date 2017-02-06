@@ -23,6 +23,13 @@ class Broker:
                 for binding
                 in self.definition['bindings']]
 
+    def queue_policies(self, queue_name):
+        ''' Queue policy, if any '''
+        return [policy
+                for policy
+                in self.policies()
+                if policy.pattern == queue_name]
+
     def policies(self):
         ''' Policies '''
         return [BrokerPolicy(policy)
@@ -56,10 +63,14 @@ class BrokerQueue:
         self.auto_delete = queue_definition['auto_delete']
         self.argurments = queue_definition['arguments']
 
-    def label(self):
+    def label(self, policies):
         ''' Queue label '''
-        template = '{}'
-        return template.format(self.name)
+        if policies and policies[0].definition.message_ttl is not None:
+            template = '{} \n message_ttl: {}'
+            return template.format(self.name, policies[0].definition.message_ttl)
+        else:
+            template = '{}'
+            return template.format(self.name)
 
 
 class BrokerBinding:
