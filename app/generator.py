@@ -29,10 +29,10 @@ def main():
     queues = [queue.name for queue in broker.queues()]
 
     for exchange in exchanges:
-        graph.add_node(exchange, shape='square')
+        graph.add_node(exchange, shape='square', color='#3333CC')
 
     for queue in queues:
-        graph.add_node(queue, shape='rectangle')
+        graph.add_node(queue, shape='rectangle', color='#FF0000')
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key,
