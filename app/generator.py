@@ -24,8 +24,7 @@ def gen():
     broker = Broker(json.loads(args.infile.read()))
 
     # Create graph
-    graph = pgv.AGraph(directed=True, strict=False, rankdir='TB',
-                       ratio='auto', nodesep='0.8 equally', ranksep='2.5 equally')
+    graph = pgv.AGraph(directed=True, strict=False, rankdir='LR')
     exchanges = [exchange.name for exchange in broker.exchanges()]
     queues = [queue.name for queue in broker.queues()]
 
@@ -44,12 +43,12 @@ def gen():
             graph.add_edge(policy.pattern, policy.definition.dead_letter_exchange,
                            label=policy.definition.dead_letter_routing_key, group=policy.pattern)
 
-    # Sub graphs
-    graph.add_subgraph(exchanges, 'cluster_exchanges', label='exchanges')
-    graph.add_subgraph(queues, 'cluster_queues', label='queues')
+    # Sub graphs, disabled because can't get a nice layout with subgraphs.
+    # graph.add_subgraph(exchanges, 'cluster_exchanges', label='exchanges')
+    # graph.add_subgraph(queues, 'cluster_queues', label='queues')
 
     # graph.layout(prog='dot')
-    graph.write(args.outfile)
-    # graph.draw(args.outfile.name, prog='dot')
+    # graph.write(args.outfile)
+    graph.draw(args.outfile.name, prog='dot')
 
 gen()
