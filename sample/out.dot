@@ -1,5 +1,5 @@
 digraph {
-	graph [bb="0,0,1786,888",
+	graph [bb="0,0,1787,888",
 		nodesep="0.8 equally",
 		rankdir=LR
 	];
@@ -8,16 +8,17 @@ digraph {
 		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
-		label=<<b>FilesExchange</b> <br /><br />vhost: /<br />type: topic<br />durable: True>,
+		label=<<b>FilesExchange</b> <br /><br />durable: True<br />type: topic<br />vhost: />,
 		pos="63.5,117",
 		shape=rectangle,
 		style=filled,
 		width=1.7083];
 	FilesImageConvertQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.4722,
 		label=<<b>FilesImageConvertQueue</b> <br />
-<br />dead_letter_exchange: FilesExchange<br />ha_mode: exactly<br />ha_params: 2<br />ha_sync_mode: manual<br />dead_letter_routing_key: FilesImageConvertQueue.Dead>,
+<br />dead_letter_exchange: FilesExchange<br />ha_mode: exactly<br />ha_params: 2<br />dead_letter_routing_key: FilesImageConvertQueue.Dead<br />ha_sync_mode: manual>,
 		pos="554.5,192",
 		shape=rectangle,
 		style=filled,
@@ -28,6 +29,7 @@ digraph {
 		lp="246,172.5",
 		pos="e,364.8,166.86 125.09,129.4 131.8,130.67 138.54,131.89 145,133 213.1,144.68 287.85,155.93 354.59,165.42"];
 	FilesDeadQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
 		label=<<b>FilesDeadQueue</b> <br />
@@ -50,7 +52,7 @@ digraph {
 		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
-		label=<<b>MailsExchange</b> <br /><br />vhost: /<br />type: topic<br />durable: True>,
+		label=<<b>MailsExchange</b> <br /><br />durable: True<br />type: topic<br />vhost: />,
 		pos="63.5,567",
 		shape=rectangle,
 		style=filled,
@@ -59,7 +61,7 @@ digraph {
 		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
-		label=<<b>NotificationsExchange</b> <br /><br />vhost: /<br />type: topic<br />durable: True>,
+		label=<<b>NotificationsExchange</b> <br /><br />durable: True<br />type: topic<br />vhost: />,
 		pos="554.5,760",
 		shape=rectangle,
 		style=filled,
@@ -70,6 +72,7 @@ digraph {
 		lp="246,712.5",
 		pos="e,465.75,740.27 111.77,606.18 122.3,613.76 133.7,621.15 145,627 245.67,679.11 370.79,716.22 455.84,737.78"];
 	MailDeadQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
 		label=<<b>MailDeadQueue</b> <br />
@@ -84,10 +87,11 @@ digraph {
 		lp="246,605.5",
 		pos="e,470.82,614.36 127.43,574.34 212.01,584.19 363,601.79 460.66,613.18"];
 	MailDelayedQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.4722,
 		label=<<b>MailDelayedQueue</b> <br />
-<br />dead_letter_exchange: MailDelayedExchange<br />message_ttl: 30000<br />ha_mode: exactly<br />ha_params: 2<br />ha_sync_mode: manual>,
+<br />dead_letter_exchange: MailDelayedExchange<br />ha_mode: exactly<br />ha_params: 2<br />message_ttl: 30000<br />ha_sync_mode: manual>,
 		pos="554.5,474",
 		shape=rectangle,
 		style=filled,
@@ -98,10 +102,11 @@ digraph {
 		lp="246,554.5",
 		pos="e,401.23,498.73 127.25,550.98 133.24,549.58 139.23,548.23 145,547 225.75,529.77 316.07,513.34 391.2,500.44"];
 	SomeNotificationQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.4722,
 		label=<<b>SomeNotificationQueue</b> <br />
-<br />dead_letter_exchange: NotificationsExchange<br />ha_mode: exactly<br />ha_params: 2<br />ha_sync_mode: manual<br />dead_letter_routing_key: SomeNotificationQueue.Dead>,
+<br />dead_letter_exchange: NotificationsExchange<br />ha_mode: exactly<br />ha_params: 2<br />dead_letter_routing_key: SomeNotificationQueue.Dead<br />ha_sync_mode: manual>,
 		pos="1153,835",
 		shape=rectangle,
 		style=filled,
@@ -112,6 +117,7 @@ digraph {
 		lp="857,815.5",
 		pos="e,969.69,812.08 643.2,771.03 726.02,781.44 853.05,797.41 959.46,810.79"];
 	NotificatiesDeadQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
 		label=<<b>NotificatiesDeadQueue</b> <br />
@@ -129,7 +135,7 @@ digraph {
 		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.0833,
-		label=<<b>MailDelayedExchange</b> <br /><br />vhost: /<br />type: topic<br />durable: True>,
+		label=<<b>MailDelayedExchange</b> <br /><br />durable: True<br />type: topic<br />vhost: />,
 		pos="1153,464",
 		shape=rectangle,
 		style=filled,
@@ -145,23 +151,24 @@ digraph {
 		lp="857,764.5",
 		pos="e,643.38,749.72 1037.3,781.91 1009.9,771.59 980.39,762.34 952,757 851.6,738.12 734.36,742.13 653.54,748.85"];
 	MailQueue	 [fillcolor="#FF0000",
+		fontcolor="#ffffff",
 		fontname=arial,
 		height=1.4722,
 		label=<<b>MailQueue</b> <br />
-<br />dead_letter_exchange: MailsExchange<br />ha_mode: exactly<br />ha_params: 2<br />ha_sync_mode: manual<br />dead_letter_routing_key: MailQueue.Dead>,
-		pos="1644.5,389",
+<br />dead_letter_exchange: MailsExchange<br />ha_mode: exactly<br />ha_params: 2<br />dead_letter_routing_key: MailQueue.Dead<br />ha_sync_mode: manual>,
+		pos="1645.5,389",
 		shape=rectangle,
 		style=filled,
 		width=3.9306];
 	MailDelayedExchange -> MailQueue	 [fontname=arial,
 		group=MailDelayedExchange,
 		label="Some.Entity.Created",
-		lp="1419.5,440.5",
-		pos="e,1502.5,410.6 1240.7,450.72 1310.3,440.05 1409.9,424.8 1492.5,412.13"];
+		lp="1420,440.5",
+		pos="e,1503.6,410.55 1240.6,450.76 1310.5,440.08 1410.5,424.78 1493.5,412.08"];
 	MailQueue -> MailsExchange	 [fontname=arial,
 		group=MailQueue,
 		label="MailQueue.Dead",
 		lp="857,349.5",
-		pos="e,103.06,527.69 1502.8,369.89 1265,341.9 769.95,302.19 365,392 259.78,415.33 234.83,434.45 145,494 133.23,501.8 121.46,511.28 110.7,\
-520.79"];
+		pos="e,103.06,527.69 1503.7,369.88 1265.7,341.86 770.27,302.12 365,392 259.78,415.33 234.83,434.45 145,494 133.23,501.8 121.46,511.28 \
+110.7,520.79"];
 }

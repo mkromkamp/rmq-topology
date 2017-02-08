@@ -34,7 +34,8 @@ def main():
 
     for queue in broker.queues():
         graph.add_node(queue.name, label=queue.label(),
-                       style='filled', shape='rectangle', fillcolor='#FF0000', fontname='arial')
+                       style='filled', shape='rectangle', fillcolor='#FF0000',
+                       fontname='arial', fontcolor='#ffffff')
 
     for binding in broker.bindings():
         graph.add_edge(binding.source, binding.destination, label=binding.routing_key,
