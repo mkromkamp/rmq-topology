@@ -50,7 +50,7 @@ def main():
 
     graph.layout(prog='dot')
     graph.write(args.outfile)
-    # graph.draw(args.outfile.name, prog='dot')
+    
     args.outfile.close()
 
 
