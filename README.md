@@ -19,3 +19,7 @@ Generate png file:
 ``` bash
 dot -Tpng -o ./sample/graph.png ./sample/out.dot
 ```
+
+### Sample output
+
+![Sample](./sample/graph.png)
